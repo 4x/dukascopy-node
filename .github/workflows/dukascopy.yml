@@ -18,6 +18,11 @@ jobs:
 
       - name: Install deps
         run: npm install googleapis
+      - name: Install upload deps
+        run: cd tools/upload && npm install
+
+      - name: Install dukascopy-node
+        run: npm install dukascopy-node --global
 
       - name: Run dukascopy-node
         run: |
@@ -34,4 +39,4 @@ jobs:
           GOOGLE_SERVICE_ACCOUNT_KEY: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY }}
           FILE_TO_UPLOAD: oneMonthUSDHKD.csv
           GDRIVE_FOLDER_ID: ${{ secrets.GDRIVE_FOLDER_ID }}
-        run: node upload-to-drive.js
+        run: node ${{ github.workspace }}/tools/upload/upload-to-drive.js
