@@ -49,6 +49,7 @@
 		"btcusd"
 	],
 	"dependencies": {
+		"@dsnp/parquetjs": "1.8.7",
 		"chalk": "3.0.0",
 		"cli-progress": "3.10.0",
 		"commander": "5.0.0",
