@@ -1,5 +1,5 @@
 import fs, { WriteStream } from 'fs';
-import parquet from '@dsnp/parquetjs';
+import { ParquetWriter, ParquetSchema } from '@dsnp/parquetjs';
 import { Format, FormatType } from '../config/format';
 import { Timeframe, TimeframeType } from '../config/timeframes';
 
@@ -24,8 +24,8 @@ export async function writeStream(
     existingBodyHeaders.forEach(h => {
       schemaDefinition[h] = { type: h === 'timestamp' ? 'INT64' : 'DOUBLE' };
     });
-    const schema = new parquet.ParquetSchema(schemaDefinition);
-    const writer = await parquet.ParquetWriter.openStream(schema, fileWriteStream);
+    const schema = new ParquetSchema(schemaDefinition);
+    const writer = await ParquetWriter.openStream(schema, fileWriteStream);
 
     for (const item of payload) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -108,7 +108,7 @@ export class BatchStreamWriter {
   private bodyHeaders: string[];
   private startDateTs: number;
   private endDateTs: number;
-  private parquetWriter?: parquet.ParquetWriter;
+  private parquetWriter?: ParquetWriter;
 
   constructor(options: BatchStreamWriterOptions) {
     this.fileWriteStream = options.fileWriteStream;
@@ -161,8 +161,8 @@ export class BatchStreamWriter {
         this.bodyHeaders.forEach(h => {
           schemaDefinition[h] = { type: h === 'timestamp' ? 'INT64' : 'DOUBLE' };
         });
-        const schema = new parquet.ParquetSchema(schemaDefinition);
-        this.parquetWriter = await parquet.ParquetWriter.openStream(schema, this.fileWriteStream);
+        const schema = new ParquetSchema(schemaDefinition);
+        this.parquetWriter = await ParquetWriter.openStream(schema, this.fileWriteStream);
       }
 
       for (const item of batchWithinRange) {
@@ -247,8 +247,8 @@ export class BatchStreamWriter {
         this.bodyHeaders.forEach(h => {
           schemaDefinition[h] = { type: h === 'timestamp' ? 'INT64' : 'DOUBLE' };
         });
-        const schema = new parquet.ParquetSchema(schemaDefinition);
-        this.parquetWriter = await parquet.ParquetWriter.openStream(schema, this.fileWriteStream);
+        const schema = new ParquetSchema(schemaDefinition);
+        this.parquetWriter = await ParquetWriter.openStream(schema, this.fileWriteStream);
         await this.parquetWriter.close();
       }
       // Parquet writer closes the stream
