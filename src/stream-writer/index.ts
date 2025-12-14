@@ -25,7 +25,8 @@ export async function writeStream(
       schemaDefinition[h] = { type: h === 'timestamp' ? 'INT64' : 'DOUBLE' };
     });
     const schema = new ParquetSchema(schemaDefinition);
-    const writer = await ParquetWriter.openStream(schema, fileWriteStream);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const writer = await ParquetWriter.openStream<any>(schema, fileWriteStream);
 
     for (const item of payload) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -108,7 +109,8 @@ export class BatchStreamWriter {
   private bodyHeaders: string[];
   private startDateTs: number;
   private endDateTs: number;
-  private parquetWriter?: ParquetWriter;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private parquetWriter?: ParquetWriter<any>;
 
   constructor(options: BatchStreamWriterOptions) {
     this.fileWriteStream = options.fileWriteStream;
@@ -162,7 +164,8 @@ export class BatchStreamWriter {
           schemaDefinition[h] = { type: h === 'timestamp' ? 'INT64' : 'DOUBLE' };
         });
         const schema = new ParquetSchema(schemaDefinition);
-        this.parquetWriter = await ParquetWriter.openStream(schema, this.fileWriteStream);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.parquetWriter = await ParquetWriter.openStream<any>(schema, this.fileWriteStream);
       }
 
       for (const item of batchWithinRange) {
@@ -248,7 +251,8 @@ export class BatchStreamWriter {
           schemaDefinition[h] = { type: h === 'timestamp' ? 'INT64' : 'DOUBLE' };
         });
         const schema = new ParquetSchema(schemaDefinition);
-        this.parquetWriter = await ParquetWriter.openStream(schema, this.fileWriteStream);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.parquetWriter = await ParquetWriter.openStream<any>(schema, this.fileWriteStream);
         await this.parquetWriter.close();
       }
       // Parquet writer closes the stream
