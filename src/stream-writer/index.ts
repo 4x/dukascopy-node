@@ -1,5 +1,5 @@
 import fs, { WriteStream } from 'fs';
-import { ParquetWriter, ParquetSchema } from '@dsnp/parquetjs';
+import { ParquetWriter, ParquetSchema } from '@dobesv/parquets';
 import { Format, FormatType } from '../config/format';
 import { Timeframe, TimeframeType } from '../config/timeframes';
 
