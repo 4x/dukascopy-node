@@ -49,6 +49,7 @@
 		"btcusd"
 	],
 	"dependencies": {
+		"@dobesv/parquets": "0.11.9",
 		"chalk": "3.0.0",
 		"cli-progress": "3.10.0",
 		"commander": "5.0.0",
