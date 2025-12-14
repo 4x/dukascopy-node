@@ -69,12 +69,7 @@ export enum Format {
    * `
    * ```
    */
-  csv = 'csv',
-  /**
-   * Data will be saved as a **Parquet** file.
-   * Note: This format is only supported when writing to a file (CLI or Stream writer).
-   */
-  parquet = 'parquet'
+  csv = 'csv'
 }
 
 export type FormatType = keyof typeof Format;

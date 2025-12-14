@@ -49,7 +49,6 @@
 		"btcusd"
 	],
 	"dependencies": {
-		"@dobesv/parquets": "0.11.9",
 		"chalk": "3.0.0",
 		"cli-progress": "3.10.0",
 		"commander": "5.0.0",
@@ -58,7 +57,8 @@
 		"fastest-validator": "1.10.0",
 		"fs-extra": "10.1.0",
 		"lzma-purejs-requirejs": "1.0.0",
-		"node-fetch": "2.6.7"
+		"node-fetch": "2.6.7",
+		"parquetjs-lite": "0.8.7"
 	},
 	"devDependencies": {
 		"@types/cli-progress": "3.9.2",
